@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Look Here - Cam</string>
+    <string name="camera_permission_confirmation">This app demonstrates the usage of CameraView, Read and Write Storage. In order to do that, it needs permission to access camera.</string>
+    <string name="camera_permission_not_granted">Camera app cannot do anything without permission.</string>
+    <string name="switch_flash">Switch flash</string>
+    <string name="switch_camera">Switch camera</string>
+    <string name="flash_auto">Flash auto</string>
+    <string name="flash_off">Flash off</string>
+    <string name="flash_on">Flash on</string>
+
+    <string name="APP_AD_ID">ca-app-pub-3924158907329616~9536912933</string>
+    <!--<string name="AD_VIEW_ID">ca-app-pub-3924158907329616/8186396149</string>-->
+
+        <!--Test Ad ID Below-->
+    <string name="AD_VIEW_ID">ca-app-pub-3940256099942544/6300978111</string>
+</resources>

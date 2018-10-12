@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="fab_margin">8dp</dimen>
+    <dimen name="ad_view_margin">2dp</dimen>
+</resources>

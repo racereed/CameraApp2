@@ -8,12 +8,15 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.AdView;
 import com.otaliastudios.cameraview.CameraListener;
@@ -34,13 +37,19 @@ import camera1.themaestrochef.com.cameraapp.Utilities.ImageHelper;
 import camera1.themaestrochef.com.cameraapp.Utilities.PermissionUtilities;
 import camera1.themaestrochef.com.cameraapp.Utilities.SharedPreferencesUtilities;
 import camera1.themaestrochef.com.cameraapp.Utilities.UiUtilise;
+// ToDo start the video at 5 minutes https://www.youtube.com/watch?v=vOn44fLdGDU I've imp;emented everything before that for InAppBilling.
 
-public class CaptureImage extends AppCompatActivity {
+public class CaptureImage extends AppCompatActivity implements BillingProcessor.IBillingHandler{
+    BillingProcessor bp;
 
     private static final String CAMERA_FACING_MODE = "camera_facing_mode";
     private static final String CAMERA_MODE_FRONT = "FRONT";
 
+    public Boolean adsDisabled = false;
 
+    @Nullable
+    @BindView(R.id.adView)
+    AdView mAdView;
 
     @BindView(R.id.camera)
     CameraView mCameraView;
@@ -48,14 +57,12 @@ public class CaptureImage extends AppCompatActivity {
     @BindView(R.id.switch_flash)
     ImageView flashIcon;
 
-    @BindView(R.id.pinch_image)
-    ImageView pinchIcon;
 
     @BindView(R.id.last_captured_image)
     ImageView lastImage;
 
     public static Activity activity;
-    boolean isPunchable;
+    boolean isPunchable =true;
 
     private static final Flash[] FLASH_OPTIONS = {
             Flash.OFF,
@@ -63,8 +70,7 @@ public class CaptureImage extends AppCompatActivity {
             Flash.AUTO
     };
 
-    @BindView(R.id.adView)
-    AdView mAdView;
+
 
     private static final int[] FLASH_ICONS = {
             R.drawable.ic_flash_off,
@@ -80,13 +86,24 @@ public class CaptureImage extends AppCompatActivity {
         mCameraView.destroy();
     }
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        if (adsDisabled){
+            setContentView(R.layout.content_main_no_ad);
+        } else{
+            setContentView(R.layout.content_main);
+        }
         activity = this;
         ButterKnife.bind(this);
 
+        bp = new BillingProcessor(this, null, this);
+        bp.initialize();
+        // or bp = BillingProcessor.newBillingProcessor(this, "YOUR LICENSE KEY FROM GOOGLE PLAY CONSOLE HERE", this);
+        // See below on why this is a useful alternative
 
         //Hide notificationBar
         UiUtilise.hideSystemBar(this);
@@ -109,8 +126,11 @@ public class CaptureImage extends AppCompatActivity {
                 if (mode.equals(CAMERA_MODE_FRONT))
                     mCameraView.setFacing(Facing.FRONT);
 
-        }
+        } if (!adsDisabled)
         AdsUtilities.initAds(mAdView);
+
+
+
     }
 
     private void initIcons() {
@@ -119,16 +139,11 @@ public class CaptureImage extends AppCompatActivity {
         mCameraView.setFlash(FLASH_OPTIONS[mCurrentFlash]);
 
         isPunchable = SharedPreferencesUtilities.getPinchValue(this);
-        if (mCameraView != null) {
-            if (isPunchable) {
+
                 mCameraView.mapGesture(Gesture.PINCH, GestureAction.ZOOM);
-                pinchIcon.setImageResource(android.R.drawable.star_big_on);
-            } else {
-                mCameraView.mapGesture(Gesture.PINCH, GestureAction.NONE);
-                pinchIcon.setImageResource(android.R.drawable.star_big_off);
-            }
+
         }
-    }
+
 
     private void saveImg(final byte[] jpeg) {
 
@@ -278,19 +293,7 @@ public class CaptureImage extends AppCompatActivity {
         mCameraView.toggleFacing();
     }
 
-    @OnClick(R.id.pinch_image)
-    public void switchPinch() {
-        if (isPunchable) {
-            pinchIcon.setImageResource(android.R.drawable.star_big_off);
-            mCameraView.mapGesture(Gesture.PINCH, GestureAction.NONE); // Pinch to zoom!
-            isPunchable = false;
-        } else {
-            pinchIcon.setImageResource(android.R.drawable.star_big_on);
-            mCameraView.mapGesture(Gesture.PINCH, GestureAction.ZOOM); // Pinch to zoom!
-            isPunchable = true;
-        }
-        SharedPreferencesUtilities.setPinch(this, isPunchable);
-    }
+
 
     @OnClick(R.id.last_captured_image)
     public void showImages() {
@@ -312,4 +315,23 @@ public class CaptureImage extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
+
+    }
+
+    @Override
+    public void onPurchaseHistoryRestored() {
+
+    }
+
+    @Override
+    public void onBillingError(int errorCode, @Nullable Throwable error) {
+
+    }
+
+    @Override
+    public void onBillingInitialized() {
+
+    }
 }

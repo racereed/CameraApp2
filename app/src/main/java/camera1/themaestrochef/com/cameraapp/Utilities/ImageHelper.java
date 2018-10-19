@@ -9,19 +9,13 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 
 import java.io.File;
-import java.io.FileOutputStream;
 
 import camera1.themaestrochef.com.cameraapp.R;
 
@@ -61,8 +55,7 @@ public class ImageHelper {
     }
 
 
-    /**
-     * Embeds an image watermark over a source image to produce
+    /**Embeds an image watermark over a source image to produce
      * a watermarked one.
      * @param watermarkImageFile The image file used as the watermark.
      * @param sourceImageFile The source image file.
@@ -92,7 +85,7 @@ public class ImageHelper {
 //                .ic_launcher);
 
 //        watermark= BitmapFactory.decodeResource( context.getResources(), R.drawable.ic_camera);
-        watermark = getBitmapFromVectorDrawable(context, R.mipmap.ic_launcher);
+        watermark = getBitmapFromVectorDrawable(context, R.drawable.doggy_pic_watermark);
 
 //        Drawable vectorDrawable = VectorDrawableCompat.create(res, R.mipmap.ic_launcher,  context.getTheme());
 //        watermark = ((BitmapDrawable) vectorDrawable).getBitmap();
@@ -117,7 +110,7 @@ public class ImageHelper {
         return bmp;
     }
 
-    public static Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
+    private static Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
         Drawable drawable = ContextCompat.getDrawable(context, drawableId);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             drawable = (DrawableCompat.wrap(drawable)).mutate();

@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.android.vending.BILLING" />
 
-
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -18,9 +17,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--<meta-data-->
-        <!--android:name="com.google.android.gms.ads.APPLICATION_ID"-->
-        <!--android:value="ca-app-pub-3924158907329616~9536912933" />-->
+
+        <!-- <meta-data -->
+        <!-- android:name="com.google.android.gms.ads.APPLICATION_ID" -->
+        <!-- android:value="ca-app-pub-3924158907329616~9536912933" /> -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/APP_AD_ID" />
@@ -28,7 +28,6 @@
         <activity
             android:name=".Activities.CaptureImage"
             android:label="@string/app_name"
-
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,14 +36,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.ShowAppImages" />
-
-        <activity android:name=".Activities.CaptureVideo">
-
-        </activity>
-
+        <activity android:name=".Activities.CaptureVideo"></activity>
         <activity android:name=".Activities.VideoPreviewActivity" />
         <activity android:name=".Activities.ShowAppVideos" />
-
         <activity android:name=".Activities.ImagePreviewActivity" />
 
         <provider
@@ -57,7 +51,7 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
+        <activity android:name=".Activities.InAppPurchases"></activity>
     </application>
-
 
 </manifest>

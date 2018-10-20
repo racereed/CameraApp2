@@ -15,8 +15,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.anjlab.android.iab.v3.BillingProcessor;
-import com.anjlab.android.iab.v3.TransactionDetails;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.AdView;
 import com.otaliastudios.cameraview.CameraListener;
@@ -37,15 +35,16 @@ import camera1.themaestrochef.com.cameraapp.Utilities.ImageHelper;
 import camera1.themaestrochef.com.cameraapp.Utilities.PermissionUtilities;
 import camera1.themaestrochef.com.cameraapp.Utilities.SharedPreferencesUtilities;
 import camera1.themaestrochef.com.cameraapp.Utilities.UiUtilise;
-// ToDo start the video at 5 minutes https://www.youtube.com/watch?v=vOn44fLdGDU I've imp;emented everything before that for InAppBilling.
 
-public class CaptureImage extends AppCompatActivity implements BillingProcessor.IBillingHandler{
-    BillingProcessor bp;
+public class CaptureImage extends AppCompatActivity {
 
     private static final String CAMERA_FACING_MODE = "camera_facing_mode";
     private static final String CAMERA_MODE_FRONT = "FRONT";
 
-    public Boolean adsDisabled = false;
+    @BindView(R.id.settings_wheel)
+    ImageView mSettingswheel;
+
+
 
     @Nullable
     @BindView(R.id.adView)
@@ -80,19 +79,20 @@ public class CaptureImage extends AppCompatActivity implements BillingProcessor.
 
     private int mCurrentFlash;
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mCameraView.destroy();
-    }
 
+    @Override
+    public void onDestroy() {
+
+        mCameraView.destroy();
+        super.onDestroy();
+    }
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (adsDisabled){
+        if (InAppPurchases.adsDisabled){
             setContentView(R.layout.content_main_no_ad);
         } else{
             setContentView(R.layout.content_main);
@@ -100,10 +100,6 @@ public class CaptureImage extends AppCompatActivity implements BillingProcessor.
         activity = this;
         ButterKnife.bind(this);
 
-        bp = new BillingProcessor(this, null, this);
-        bp.initialize();
-        // or bp = BillingProcessor.newBillingProcessor(this, "YOUR LICENSE KEY FROM GOOGLE PLAY CONSOLE HERE", this);
-        // See below on why this is a useful alternative
 
         //Hide notificationBar
         UiUtilise.hideSystemBar(this);
@@ -126,7 +122,7 @@ public class CaptureImage extends AppCompatActivity implements BillingProcessor.
                 if (mode.equals(CAMERA_MODE_FRONT))
                     mCameraView.setFacing(Facing.FRONT);
 
-        } if (!adsDisabled)
+        } if (!InAppPurchases.adsDisabled)
         AdsUtilities.initAds(mAdView);
 
 
@@ -308,6 +304,14 @@ public class CaptureImage extends AppCompatActivity implements BillingProcessor.
         finish();
     }
 
+    @OnClick(R.id.settings_wheel)
+    public void openInAppPurchasesActivity(){
+      //  bp.purchase(CaptureImage.this, "android.test.purchased");
+
+        Intent intent = new Intent(this, InAppPurchases.class);
+        startActivity(intent);
+    }
+
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mCameraView.getFacing() == Facing.FRONT) {
@@ -315,23 +319,4 @@ public class CaptureImage extends AppCompatActivity implements BillingProcessor.
         }
     }
 
-    @Override
-    public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
-
-    }
-
-    @Override
-    public void onPurchaseHistoryRestored() {
-
-    }
-
-    @Override
-    public void onBillingError(int errorCode, @Nullable Throwable error) {
-
-    }
-
-    @Override
-    public void onBillingInitialized() {
-
-    }
 }

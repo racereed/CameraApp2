@@ -11,6 +11,6 @@
     <string name="APP_AD_ID">ca-app-pub-3924158907329616~9536912933</string>
     <!--<string name="AD_VIEW_ID">ca-app-pub-3924158907329616/8186396149</string>-->
 
-        <!--Test Ad ID Below-->
+    <!--Test Ad ID Below-->
     <string name="AD_VIEW_ID">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

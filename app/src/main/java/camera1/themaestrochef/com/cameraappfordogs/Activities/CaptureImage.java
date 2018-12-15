@@ -1,4 +1,4 @@
-package camera1.themaestrochef.com.cameraapp.Activities;
+package camera1.themaestrochef.com.cameraappfordogs.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -28,23 +28,18 @@ import com.otaliastudios.cameraview.GestureAction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import camera1.themaestrochef.com.cameraapp.R;
-import camera1.themaestrochef.com.cameraapp.Utilities.AdsUtilities;
-import camera1.themaestrochef.com.cameraapp.Utilities.CapturePhotoUtils;
-import camera1.themaestrochef.com.cameraapp.Utilities.ImageHelper;
-import camera1.themaestrochef.com.cameraapp.Utilities.PermissionUtilities;
-import camera1.themaestrochef.com.cameraapp.Utilities.SharedPreferencesUtilities;
-import camera1.themaestrochef.com.cameraapp.Utilities.UiUtilise;
+import camera1.themaestrochef.com.cameraappfordogs.R;
+import camera1.themaestrochef.com.cameraappfordogs.Utilities.AdsUtilities;
+import camera1.themaestrochef.com.cameraappfordogs.Utilities.CapturePhotoUtils;
+import camera1.themaestrochef.com.cameraappfordogs.Utilities.ImageHelper;
+import camera1.themaestrochef.com.cameraappfordogs.Utilities.PermissionUtilities;
+import camera1.themaestrochef.com.cameraappfordogs.Utilities.SharedPreferencesUtilities;
+import camera1.themaestrochef.com.cameraappfordogs.Utilities.UiUtilise;
 
 public class CaptureImage extends AppCompatActivity {
-
     private static final String CAMERA_FACING_MODE = "camera_facing_mode";
     private static final String CAMERA_MODE_FRONT = "FRONT";
-
-    @BindView(R.id.settings_wheel)
-    ImageView mSettingswheel;
-
-
+    private AudioManager mAudioManager;
 
     @Nullable
     @BindView(R.id.adView)
@@ -87,19 +82,52 @@ public class CaptureImage extends AppCompatActivity {
         super.onDestroy();
     }
 
+    private void releaseMediaPlayer() {
+        // If the media player is not null, then it may be currently playing a sound.
+        if (mPlayer != null) {
+            // Regardless of the current state of the media player, release its resources
+            // because we no longer need it.
+            mPlayer.release();
+
+            // Set the media player back to null. For our code, we've decided that
+            // setting the media player to null is an easy way to tell that the media player
+            // is not configured to play an audio file at the moment.
+            mPlayer = null;
+
+            // Regardless of whether or not we were granted audio focus, abandon it. This also
+            // unregisters the AudioFocusChangeListener so we don't get anymore callbacks.
+            mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
+        }
+    }
+    AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+        @Override
+        public void onAudioFocusChange(int focusChange) {
+            if(focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
+                    focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+                // AUDIOFOCUS_LOSS TRANSIENT means we have lost audio focus for a short amount of time
+                // and AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK means we have lost audio focus
+                // our app still continues to play song at lower volume but in both cases,
+                // we want our app to pause playback and start it from beginning.
+                mPlayer.pause();
+
+            } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+                // it means we have gained focused and start playback
+                mPlayer.start();
 
 
-    @Override
+            releaseMediaPlayer();
+            }
+        }
+    };
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (InAppPurchases.adsDisabled){
+          if (camera1.themaestrochef.com.cameraappfordogs.Activities.InAppPurchases.adsDisabled){
             setContentView(R.layout.content_main_no_ad);
         } else{
             setContentView(R.layout.content_main);
         }
         activity = this;
         ButterKnife.bind(this);
-
 
         //Hide notificationBar
         UiUtilise.hideSystemBar(this);
@@ -122,12 +150,14 @@ public class CaptureImage extends AppCompatActivity {
                 if (mode.equals(CAMERA_MODE_FRONT))
                     mCameraView.setFacing(Facing.FRONT);
 
-        } if (!InAppPurchases.adsDisabled)
+        } if (!camera1.themaestrochef.com.cameraappfordogs.Activities.InAppPurchases.adsDisabled)
         AdsUtilities.initAds(mAdView);
 
 
 
     }
+
+
 
     private void initIcons() {
         mCurrentFlash = SharedPreferencesUtilities.getFlashIndex(this);
@@ -207,13 +237,15 @@ public class CaptureImage extends AppCompatActivity {
         // Get the AudioManager instance
         AudioManager am = (AudioManager) getSystemService(AUDIO_SERVICE);
         // Get the music current volume level
-        int music_volume_level = am.getStreamVolume(AudioManager.STREAM_MUSIC);
+        if (am != null) {
+            int music_volume_level = am.getStreamVolume(AudioManager.STREAM_MUSIC);
+
         // Get the device music maximum volume level
         int max = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
         if (music_volume_level < 2){
             Toast.makeText(getApplicationContext(),"Volume Might Be Too Low",Toast.LENGTH_LONG).show();// Set your own toast  message
-        }
+        }}
     }
 
     @Override
@@ -227,8 +259,9 @@ public class CaptureImage extends AppCompatActivity {
 
     @OnClick(R.id.sound_toy)
     public void playToySound() {
+
         Log.i("hellow", "toy sound works");
-        // mPlayer.release();
+        Log.i("hellow", "toy sound works");
         mPlayer = MediaPlayer.create(getApplicationContext(),R.raw.squeakytoy2);
         mPlayer.start();//Start playing the music
         makeVolumeToast();
@@ -237,6 +270,7 @@ public class CaptureImage extends AppCompatActivity {
 
     @OnClick(R.id.puppy_button)
     public void playPuppySound () {
+
         mPlayer = MediaPlayer.create(getApplicationContext(),R.raw.puppy_sound);
         mPlayer.start();//Start playing the music
         makeVolumeToast();
@@ -304,13 +338,15 @@ public class CaptureImage extends AppCompatActivity {
         finish();
     }
 
-    @OnClick(R.id.settings_wheel)
-    public void openInAppPurchasesActivity(){
-      //  bp.purchase(CaptureImage.this, "android.test.purchased");
+    //take this off to enable the next page to open to buy upgrades.
 
-        Intent intent = new Intent(this, InAppPurchases.class);
-        startActivity(intent);
-    }
+//    @OnClick(R.id.settings_wheel)
+//    public void openInAppPurchasesActivity(){
+//      //  bp.purchase(CaptureImage.this, "android.test.purchased");
+//
+//        Intent intent = new Intent(this, InAppPurchases.class);
+//        startActivity(intent);
+//    }
 
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

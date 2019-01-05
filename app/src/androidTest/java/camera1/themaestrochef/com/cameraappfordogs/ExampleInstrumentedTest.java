@@ -1,4 +1,4 @@
-package camera1.themaestrochef.com.cameraapp;
+package camera1.themaestrochef.com.cameraappfordogs;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

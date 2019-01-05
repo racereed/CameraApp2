@@ -1,4 +1,4 @@
-package camera1.themaestrochef.com.cameraapp.Adapters;
+package camera1.themaestrochef.com.cameraappfordogs.Adapters;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -12,10 +12,10 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import camera1.themaestrochef.com.cameraapp.Activities.ShowAppVideos;
-import camera1.themaestrochef.com.cameraapp.Activities.VideoPreviewActivity;
-import camera1.themaestrochef.com.cameraapp.R;
-import camera1.themaestrochef.com.cameraapp.Models.Model_Video;
+import camera1.themaestrochef.com.cameraappfordogs.Activities.ShowAppVideos;
+import camera1.themaestrochef.com.cameraappfordogs.Activities.VideoPreviewActivity;
+import camera1.themaestrochef.com.cameraappfordogs.R;
+import camera1.themaestrochef.com.cameraappfordogs.Models.Model_Video;
 
 public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.viewHolder> {
 

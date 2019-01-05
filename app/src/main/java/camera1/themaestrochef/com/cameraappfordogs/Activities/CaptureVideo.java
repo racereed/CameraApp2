@@ -1,4 +1,4 @@
-package camera1.themaestrochef.com.cameraapp.Activities;
+package camera1.themaestrochef.com.cameraappfordogs.Activities;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -26,12 +26,12 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import camera1.themaestrochef.com.cameraapp.R;
-import camera1.themaestrochef.com.cameraapp.Utilities.AdsUtilities;
-import camera1.themaestrochef.com.cameraapp.Models.Model_Video;
-import camera1.themaestrochef.com.cameraapp.Utilities.PermissionUtilities;
-import camera1.themaestrochef.com.cameraapp.Utilities.SharedPreferencesUtilities;
-import camera1.themaestrochef.com.cameraapp.Utilities.UiUtilise;
+import camera1.themaestrochef.com.cameraappfordogs.R;
+import camera1.themaestrochef.com.cameraappfordogs.Utilities.AdsUtilities;
+import camera1.themaestrochef.com.cameraappfordogs.Models.Model_Video;
+import camera1.themaestrochef.com.cameraappfordogs.Utilities.PermissionUtilities;
+import camera1.themaestrochef.com.cameraappfordogs.Utilities.SharedPreferencesUtilities;
+import camera1.themaestrochef.com.cameraappfordogs.Utilities.UiUtilise;
 
 public class CaptureVideo extends AppCompatActivity {
 

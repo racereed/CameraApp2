@@ -1,4 +1,4 @@
-package camera1.themaestrochef.com.cameraapp.Activities;
+package camera1.themaestrochef.com.cameraappfordogs.Activities;
 
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -14,9 +14,9 @@ import com.google.android.gms.ads.AdView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import camera1.themaestrochef.com.cameraapp.R;
-import camera1.themaestrochef.com.cameraapp.Utilities.AdsUtilities;
-import camera1.themaestrochef.com.cameraapp.Utilities.UiUtilise;
+import camera1.themaestrochef.com.cameraappfordogs.R;
+import camera1.themaestrochef.com.cameraappfordogs.Utilities.AdsUtilities;
+import camera1.themaestrochef.com.cameraappfordogs.Utilities.UiUtilise;
 
 
 public class VideoPreviewActivity extends AppCompatActivity {

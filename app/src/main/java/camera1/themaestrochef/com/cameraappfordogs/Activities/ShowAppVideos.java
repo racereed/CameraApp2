@@ -1,4 +1,4 @@
-package camera1.themaestrochef.com.cameraapp.Activities;
+package camera1.themaestrochef.com.cameraappfordogs.Activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -19,12 +19,12 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import camera1.themaestrochef.com.cameraapp.Adapters.VideoAdapter;
-import camera1.themaestrochef.com.cameraapp.R;
-import camera1.themaestrochef.com.cameraapp.Utilities.AdsUtilities;
-import camera1.themaestrochef.com.cameraapp.Models.Model_Video;
-import camera1.themaestrochef.com.cameraapp.Utilities.PermissionUtilities;
-import camera1.themaestrochef.com.cameraapp.Utilities.UiUtilise;
+import camera1.themaestrochef.com.cameraappfordogs.Adapters.VideoAdapter;
+import camera1.themaestrochef.com.cameraappfordogs.R;
+import camera1.themaestrochef.com.cameraappfordogs.Utilities.AdsUtilities;
+import camera1.themaestrochef.com.cameraappfordogs.Models.Model_Video;
+import camera1.themaestrochef.com.cameraappfordogs.Utilities.PermissionUtilities;
+import camera1.themaestrochef.com.cameraappfordogs.Utilities.UiUtilise;
 
 
 public class ShowAppVideos extends AppCompatActivity {

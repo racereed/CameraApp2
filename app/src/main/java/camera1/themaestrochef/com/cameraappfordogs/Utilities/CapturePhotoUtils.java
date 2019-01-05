@@ -1,4 +1,4 @@
-package camera1.themaestrochef.com.cameraapp.Utilities;
+package camera1.themaestrochef.com.cameraappfordogs.Utilities;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,7 +10,6 @@ import android.content.ContentValues;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
 
 /**

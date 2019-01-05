@@ -1,4 +1,4 @@
-package camera1.themaestrochef.com.cameraapp.Utilities;
+package camera1.themaestrochef.com.cameraappfordogs.Utilities;
 
 import android.app.Activity;
 import android.support.v7.app.ActionBar;

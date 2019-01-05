@@ -1,4 +1,4 @@
-package camera1.themaestrochef.com.cameraapp.Utilities;
+package camera1.themaestrochef.com.cameraappfordogs.Utilities;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

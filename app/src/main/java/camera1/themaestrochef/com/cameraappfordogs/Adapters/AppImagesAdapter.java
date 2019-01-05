@@ -1,4 +1,4 @@
-package camera1.themaestrochef.com.cameraapp.Adapters;
+package camera1.themaestrochef.com.cameraappfordogs.Adapters;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -12,9 +12,9 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import camera1.themaestrochef.com.cameraapp.Activities.ImagePreviewActivity;
-import camera1.themaestrochef.com.cameraapp.R;
-import camera1.themaestrochef.com.cameraapp.Activities.ShowAppImages;
+import camera1.themaestrochef.com.cameraappfordogs.Activities.ImagePreviewActivity;
+import camera1.themaestrochef.com.cameraappfordogs.R;
+import camera1.themaestrochef.com.cameraappfordogs.Activities.ShowAppImages;
 
 /**
  * Created by ELSaghier on 7/25/2018.

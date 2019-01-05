@@ -1,9 +1,8 @@
-package camera1.themaestrochef.com.cameraapp.Adapters;
+package camera1.themaestrochef.com.cameraappfordogs.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +13,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import camera1.themaestrochef.com.cameraapp.Activities.ImagePreviewActivity;
-import camera1.themaestrochef.com.cameraapp.R;
+import camera1.themaestrochef.com.cameraappfordogs.Activities.ImagePreviewActivity;
+import camera1.themaestrochef.com.cameraappfordogs.R;
 
 public class ViewPageAdapter extends PagerAdapter {
 

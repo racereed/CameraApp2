@@ -1,4 +1,4 @@
-package camera1.themaestrochef.com.cameraapp.Utilities;
+package camera1.themaestrochef.com.cameraappfordogs.Utilities;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -17,7 +17,7 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 
 import java.io.File;
 
-import camera1.themaestrochef.com.cameraapp.R;
+import camera1.themaestrochef.com.cameraappfordogs.R;
 
 
 public class ImageHelper {

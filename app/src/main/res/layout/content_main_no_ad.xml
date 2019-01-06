@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activities.CaptureImage"
+    tools:showIn="@layout/activity_main">
+
+    <com.otaliastudios.cameraview.CameraView
+        android:id="@+id/camera"
+        cameraCropOutput="true"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        app:cameraGesturePinch="zoom"
+        app:cameraGestureTap="focus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+    </com.otaliastudios.cameraview.CameraView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/take_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_camera"
+        app:useCompatPadding="true" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/last_captured_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/take_picture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/take_picture"
+        app:layout_constraintTop_toTopOf="@+id/take_picture" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/take_picture"
+        app:layout_constraintEnd_toStartOf="@+id/take_picture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/take_picture"
+        app:srcCompat="@drawable/ic_video"
+        tools:ignore="ContentDescription" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        ads:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/camera">
+
+        <ImageView
+            android:id="@+id/switch_camera"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_switch_camera"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/switch_flash"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_flash_auto"
+
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/sound_toy"
+        style="@style/SoundButton"
+        android:background="@drawable/squeaky_toy"
+        ads:layout_constraintBottom_toTopOf="@+id/take_picture"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/puppy_button"
+        style="@style/SoundButton"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/puppy_button"
+        ads:layout_constraintBottom_toBottomOf="@+id/sound_toy"
+        ads:layout_constraintEnd_toStartOf="@+id/dog_button"
+        ads:layout_constraintHorizontal_bias="0.5"
+        ads:layout_constraintStart_toEndOf="@+id/sound_toy"
+        ads:layout_constraintTop_toTopOf="@+id/sound_toy"
+        ads:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/bell_button"
+        style="@style/SoundButton"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/bell_button"
+        ads:layout_constraintBottom_toBottomOf="@+id/sound_toy"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toTopOf="@+id/sound_toy" />
+
+    <Button
+        android:id="@+id/baby_button"
+        style="@style/SoundButton"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/baby_button"
+        ads:layout_constraintBottom_toBottomOf="@+id/sound_toy"
+        ads:layout_constraintEnd_toStartOf="@+id/sound_toy"
+        ads:layout_constraintHorizontal_bias="0.5"
+        ads:layout_constraintStart_toEndOf="@+id/bell_button"
+        ads:layout_constraintTop_toTopOf="@+id/sound_toy"
+        ads:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/dog_button"
+        style="@style/SoundButton"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/dog_button"
+        ads:layout_constraintBottom_toBottomOf="@+id/sound_toy"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintTop_toTopOf="@+id/sound_toy" />
+</android.support.constraint.ConstraintLayout>
